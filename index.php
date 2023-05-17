@@ -1,8 +1,16 @@
 <?php
-$lunghezzaPassword = $_GET['numberPassword'];
-$lunghezzaPassword = strlen($lunghezzaPassword) ? $lunghezzaPassword : 0;
 
 require_once __DIR__ . '/partials/functions.php';
+
+if (isset($_GET['numberPassword'])){
+
+  $lunghezzaPassword = $_GET['numberPassword'];
+
+  session_start();
+  
+  $_SESSION['passwordGenerator'] = createPassword($lunghezzaPassword);
+  header('Location: ./passwordGenerated.php');
+}
 
 ?>
 
@@ -25,13 +33,11 @@ require_once __DIR__ . '/partials/functions.php';
 
         <form action="index.php" method="GET">
           <div class="my-3 w-50">
-            <label for="numberPassword" class="form-label">Scegli la lunghezza della tua nuova Password</label>
-            <input type="number" min="4" class="form-control" id="numberPassword" name="numberPassword">
+            <label for="numberPassword"  class="form-label">Scegli la lunghezza della tua nuova Password</label>
+            <input type="number" min="4" value="4" class="form-control" id="numberPassword" name="numberPassword">
           </div>
           <button type="submit" class="btn btn-primary">GENERA</button>
         </form>
-
-        <p><?php echo createPassword($lunghezzaPassword) ?></p>
 
       </div>
     </div>
