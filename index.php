@@ -2,19 +2,7 @@
 $lunghezzaPassword = $_GET['numberPassword'];
 $lunghezzaPassword = strlen($lunghezzaPassword) ? $lunghezzaPassword : 0;
 
-$alfabetoMinuscolo = "abcdefghijklmnopqrstuvwxyz";
-$caratteriSpeciali = "!?&%$<>^+-*/()[]{}@#_=";
-$stringaGenerata ="";
-
-while (strlen($stringaGenerata) <= $lunghezzaPassword ) {
-  $stringaGenerata .= $alfabetoMinuscolo[random_int(0, strlen($alfabetoMinuscolo) - 1)];
-  $stringaGenerata .= mb_strtoupper($alfabetoMinuscolo[random_int(0, strlen($alfabetoMinuscolo) - 1)]);
-  $stringaGenerata .= $caratteriSpeciali[random_int(0, strlen($caratteriSpeciali) - 1)];
-  $stringaGenerata .= rand(0,9);
-};
-
-$stringaGenerata = substr($stringaGenerata, 0, $lunghezzaPassword);
-$randomString = str_shuffle($stringaGenerata);
+require_once __DIR__ . '/partials/functions.php';
 
 ?>
 
@@ -43,7 +31,7 @@ $randomString = str_shuffle($stringaGenerata);
           <button type="submit" class="btn btn-primary">GENERA</button>
         </form>
 
-        <p><?php echo $stringaGenerata ?></p>
+        <p><?php echo createPassword($lunghezzaPassword) ?></p>
 
       </div>
     </div>
